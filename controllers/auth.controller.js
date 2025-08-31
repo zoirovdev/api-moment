@@ -33,14 +33,7 @@ export const signUp = async (req, res, next) => {
     await session.commitTransaction();
     session.endSession();
 
-    res.status(201).json({
-      success: true,
-      message: "User created successfully",
-      data: {
-        token,
-	user: newUsers[0]
-      }
-    })
+    res.status(201).json({ token:token, user: newUsers[0] });
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
@@ -71,14 +64,7 @@ export const signIn = async (req, res, next) => {
 
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
-    res.status(200).json({
-      success: true,
-      message: "User signed in successfully",
-      data: {
-        token,
-	user
-      }
-    });
+    res.status(200).json({ token: token, user: user });
   } catch (error) {
     next(error);
   }

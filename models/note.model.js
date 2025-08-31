@@ -9,6 +9,11 @@ const noteSchema = new mongoose.Schema({
     trim: true,
     minLength: 1,
     maxLength: 500
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'User is required']
   }
 }, {
   timestamps: true

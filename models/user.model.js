@@ -28,7 +28,15 @@ const userSchema = new mongoose.Schema({
 })
 
 
+
+userSchema.virtual('notes', {
+  ref: 'Note',
+  localField: '_id',
+  foreignField: 'user'
+});
+
+
+
+
 const User = mongoose.model('User', userSchema);
-
-
 export default User;

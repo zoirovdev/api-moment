@@ -1,21 +1,21 @@
 import { Router } from "express";
-
-
+import { createNote, updateNote, deleteNote, getNotes, getNote } from "../controllers/note.controller.js";
+import { authorize } from "../middlewares/auth.middleware.js";
 
 
 
 const noteRouter = Router();
 
 
-noteRouter.get("/", (req, res) => res.json({ message: "GET all notes" }));
+noteRouter.get("/", getNotes);
 
-noteRouter.get("/:id", (req, res) => res.json({ message: "GET single note" }));
+noteRouter.get("/:id", authorize, getNote);
 
-noteRouter.post("/", (req, res) => res.json({ message: "CREATE a new note" }));
+noteRouter.post("/", authorize, createNote);
 
-noteRouter.put("/:id", (req, res) => res.json({ message: "UPDATE an exist user" }));
+noteRouter.put("/:id", authorize, updateNote);
 
-noteRouter.delete("/:id", (req, res) => res.json({ message: "DELETE an exist user" }));
+noteRouter.delete("/:id", authorize, deleteNote);
 
 
-export default Router;
+export default noteRouter;
