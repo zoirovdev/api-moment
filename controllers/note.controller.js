@@ -33,12 +33,14 @@ export const getNote = async (req, res, next) => {
 
 export const createNote = async (req, res, next) => {
   try {
+    console.log(req.body)
     const { content, user } = req.body;
     
     const newNote = await Note.create({
       content: content,
       user: user
-    }); 
+    });
+    
 
     if(!newNote) {
       const error = new Error("Note couldn't be created");
