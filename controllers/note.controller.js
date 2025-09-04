@@ -95,3 +95,32 @@ export const deleteNote = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const searchNotes = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+    const limit = 10;
+    const skip = 0;
+
+    if(!q || q.trim() === ""){
+      return res.status(400).json({ error: "Search query is required" });
+    }
+
+    const searchQuery = q.trim();
+
+    const query = {
+      $or: [
+        { content: { $regex: searchQuery, $options: 'i' } }
+      ]
+    };
+
+    const notes = await Note.find(query)
+      .sort({ updatedAt: -1 })
+      .select('content user createdAt updatedAt');
+
+    res.status(200).json(notes);
+  } catch (error) {
+    next(error);
+  }
+};
