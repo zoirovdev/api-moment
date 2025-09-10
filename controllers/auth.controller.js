@@ -11,6 +11,7 @@ import { JWT_SECRET, JWT_EXPIRES_IN } from "../config/env.js";
 export const signUp = async (req, res, next) => {
   const session = await mongoose.startSession();
   session.startTransaction();
+  console.log('API is in signup controller')
 
   try {
     const { name, email, password } = req.body;
