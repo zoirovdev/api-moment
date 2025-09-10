@@ -26,7 +26,7 @@ app.get('/', (req, res) => res.send({ message: "Success" }));
 
 
 app.listen(PORT, async () => { 
-  console.log(`app is running on http://localhost:${PORT}`) 
+  console.log(`app is running on https://api-moment-qki4.onrender.com`) 
   
   await connectToDatabase();
 });
